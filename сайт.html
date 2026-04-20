@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Поймай мошенника - безопасный интернет для детей</title>
+    <!-- Font Awesome 6 (иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F0F8FF;
+            color: #2C3E50;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #3498db;
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 32px;
+            color: #F39C12;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .user-info:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: #F39C12;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .user-level {
+            font-size: 14px;
+            color: #F39C12;
+        }
+
+        .level-badge {
+            background: #F39C12;
+            color: #2C3E50;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            width: 100px;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #F39C12;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 18px;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            background-color: #F39C12;
+            color: #2C3E50;
+            transform: scale(1.05);
+        }
+
+        .burger {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .card {
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.1);
+            margin-bottom: 30px;
+            border: 2px solid rgba(52, 152, 219, 0.2);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            color: #2C3E50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #3498db;
+            margin: 25px 0 15px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 24px;
+            margin: 15px 0 10px;
+            color: #F39C12;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+            padding: 15px 30px;
+            border-radius: 60px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            border: 2px solid transparent;
+            margin: 10px 10px 10px 0;
+        }
+
+        .btn i {
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            background-color: #2980b9;
+        }
+
+        .btn-orange {
+            background-color: #F39C12;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+        }
+        .btn-orange:hover {
+            background-color: #E67E22;
+        }
+
+        .btn-green {
+            background-color: #2ECC71;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+        .btn-green:hover {
+            background-color: #27AE60;
+        }
+
+        .btn-red {
+            background-color: #E74C3C;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        .btn-red:hover {
+            background-color: #C0392B;
+        }
+
+        .mascot {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: linear-gradient(135deg, #3498db, #5faee3);
+            color: white;
+            padding: 20px;
+            border-radius: 60px;
+            margin-bottom: 20px;
+        }
+
+        .mascot-emoji {
+            font-size: 70px;
+            background: white;
+            border-radius: 50%;
+            padding: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .mascot-message {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Новые стили для макета браузера */
+        .browser-mockup {
+            background: #f0f0f0;
+            border-radius: 20px 20px 10px 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin: 30px 0;
+        }
+
+        .browser-header {
+            background: #ddd;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .browser-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .browser-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #ff5f56;
+        }
+
+        .browser-dot:nth-child(2) {
+            background: #ffbd2e;
+        }
+
+        .browser-dot:nth-child(3) {
+            background: #27c93f;
+        }
+
+        .browser-url {
+            background: white;
+            border-radius: 50px;
+            padding: 8px 15px;
+            flex: 1;
+            font-family: monospace;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .browser-content {
+            background: white;
+            padding: 30px;
+            min-height: 200px;
+            position: relative;
+        }
+
+        .url-highlight {
+            background: #FFF3CD;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .lock-icon {
+            color: #2ECC71;
+            font-size: 18px;
+            margin-left: auto;
+        }
+
+        .lock-icon.danger {
+            color: #E74C3C;
+        }
+
+        .url-example {
+            display: inline-block;
+            background: #f8f9fa;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-family: monospace;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .comparison-item {
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .comparison-item.safe {
+            background: #E8F8F5;
+            border: 3px solid #2ECC71;
+        }
+
+        .comparison-item.danger {
+            background: #FDEDEC;
+            border: 3px solid #E74C3C;
+        }
+
+        .comparison-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .theory-item {
+            background: #f8f9fa;
+            border-radius: 30px;
+            padding: 25px;
+            text-align: center;
+            border: 3px solid #3498db;
+            transition: transform 0.3s;
+        }
+
+        .theory-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .theory-icon {
+            font-size: 70px;
+            color: #F39C12;
+            margin-bottom: 15px;
+        }
+
+        .trainer-card {
+            background: #3498db;
+            color: white;
+            border-radius: 40px;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trainer-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .streak {
+            background: #F39C12;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        .task-counter {
+            font-size: 22px;
+            background: #F39C12;
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 50px;
+            margin-bottom: 15px;
+        }
+
+        .situation-text {
+            font-size: 24px;
+            background: white;
+            color: #2C3E50;
+            padding: 30px;
+            border-radius: 30px;
+            margin: 20px 0;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+            border: 3px solid #F39C12;
+        }
+
+        .trainer-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .feedback {
+            background: white;
+            color: #2C3E50;
+            padding: 20px;
+            border-radius: 30px;
+            font-size: 22px;
+            margin: 20px 0;
+            border-left: 10px solid #3498db;
+            text-align: left;
+        }
+
+        .stickers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .sticker-item {
+            background: #f8f9fa;
+            border-radius: 30px;
+            padding: 20px;
+            text-align: center;
+            border: 3px solid #ddd;
+            transition: all 0.3s;
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+
+        .sticker-item.unlocked {
+            border-color: #F39C12;
+            opacity: 1;
+            filter: none;
+            box-shadow: 0 0 20px rgba(243, 156, 18, 0.3);
+        }
+
+        .sticker-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .rule-item {
+            background: #f8f9fa;
+            border-radius: 30px;
+            padding: 25px 15px;
+            text-align: center;
+            border: 3px solid #F39C12;
+        }
+
+        .rule-icon {
+            font-size: 50px;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .rule-title {
+            font-weight: 700;
+            font-size: 20px;
+            color: #E74C3C;
+            margin-bottom: 10px;
+        }
+
+        /* Модальное окно регистрации */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 40px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h2 {
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 18px;
+            border: 3px solid #3498db;
+            border-radius: 60px;
+            margin: 20px 0;
+            outline: none;
+        }
+
+        .modal-content input:focus {
+            border-color: #F39C12;
+        }
+
+        .avatar-selector {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .avatar-option {
+            width: 70px;
+            height: 70px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
+            border: 3px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .avatar-option:hover {
+            transform: scale(1.1);
+            border-color: #3498db;
+        }
+
+        .avatar-option.selected {
+            border-color: #F39C12;
+            background: #FFF3CD;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #2C3E50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 0;
+            }
+            .nav-menu.show {
+                display: flex;
+            }
+            .burger {
+                display: block;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            .trainer-buttons {
+                flex-direction: column;
+            }
+            .situation-text {
+                font-size: 18px;
+                padding: 20px;
+            }
+            .user-info {
+                width: 100%;
+                justify-content: center;
+            }
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .page {
+            display: none;
+        }
+        .page.active-page {
+            display: block;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #F39C12;
+            animation: fall 3s linear forwards;
+            z-index: 1000;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Модальное окно регистрации -->
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <h2><i class="fas fa-user-plus" style="color: #F39C12;"></i> Давай познакомимся!</h2>
+        <p style="font-size: 18px;">Как тебя зовут? Выбери героя!</p>
+        
+        <input type="text" id="userNameInput" placeholder="Твое имя" value="Саша" maxlength="20">
+        
+        <div class="avatar-selector" id="avatarSelector">
+            <div class="avatar-option selected" data-avatar="🦊">🦊</div>
+            <div class="avatar-option" data-avatar="🐼">🐼</div>
+            <div class="avatar-option" data-avatar="🦁">🦁</div>
+            <div class="avatar-option" data-avatar="🐧">🐧</div>
+            <div class="avatar-option" data-avatar="🐨">🐨</div>
+            <div class="avatar-option" data-avatar="🐸">🐸</div>
+        </div>
+        
+        <div class="modal-buttons">
+            <button class="btn btn-green" onclick="saveUser()"><i class="fas fa-check"></i> Готово!</button>
+        </div>
+    </div>
+</div>
+
+<header>
+    <div class="header-container">
+        <div class="logo" onclick="showPage('home')">
+            <i class="fas fa-shield-halved"></i> Поймай мошенника
+        </div>
+        <div class="user-info" id="userInfo" onclick="openRegisterModal()">
+            <div class="user-avatar" id="userAvatar">🦊</div>
+            <div class="user-details">
+                <span class="user-name" id="userNameDisplay">Саша</span>
+                <span class="user-level" id="userLevelDisplay">Новичок</span>
+            </div>
+            <div class="level-badge" id="levelBadge">⭐ 0</div>
+        </div>
+        <div class="burger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#" onclick="showPage('home'); return false;" class="active" id="link-home"><i class="fas fa-home"></i>Главная</a></li>
+            <li><a href="#" onclick="showPage('theory'); return false;" id="link-theory"><i class="fas fa-book-open"></i>Теория</a></li>
+            <li><a href="#" onclick="showPage('trainer'); return false;" id="link-trainer"><i class="fas fa-gamepad"></i>Тренажер</a></li>
+            <li><a href="#" onclick="showPage('stickers'); return false;" id="link-stickers"><i class="fas fa-star"></i>Награды</a></li>
+            <li><a href="#" onclick="showPage('memo'); return false;" id="link-memo"><i class="fas fa-clipboard-list"></i>Памятка</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <!-- Главная страница -->
+    <div id="home" class="page active-page">
+        <div class="card" style="text-align: center;">
+            <div class="mascot">
+                <div class="mascot-emoji" id="mascotEmoji">🦊</div>
+                <div class="mascot-message" id="mascotMessage">Привет! Я Лисенок-Защитник. Научу тебя ловить мошенников!</div>
+            </div>
+            <h1><i class="fas fa-shield-halved" style="color:#F39C12;"></i> Поймай мошенника в интернете!</h1>
+            <p style="font-size: 24px; margin-bottom: 30px;">Научись защищать свои пароли и не попадаться на удочку</p>
+            <div style="font-size: 120px; color: #3498db; margin: 20px 0;">
+                <i class="fas fa-child"></i> <i class="fas fa-shield" style="color:#F39C12;"></i> <i class="fas fa-robot"></i>
+            </div>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="#" onclick="showPage('theory'); return false;" class="btn btn-orange"><i class="fas fa-book-open"></i> Начать обучение</a>
+                <a href="#" onclick="showPage('trainer'); return false;" class="btn btn-green"><i class="fas fa-gamepad"></i> Проверить себя</a>
+                <a href="#" onclick="downloadMemo()" class="btn"><i class="fas fa-download"></i> Скачать памятку</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Теория (НОВАЯ, УЛУЧШЕННАЯ) -->
+    <div id="theory" class="page">
+        <div class="card">
+            <h1><i class="fas fa-book-open" style="color:#F39C12;"></i> Теория безопасности</h1>
+            
+            <!-- Раздел 1: Что такое фишинг? -->
+            <div style="background: #f8f9fa; border-radius: 30px; padding: 25px; margin-bottom: 30px;">
+                <h2><i class="fas fa-fish" style="color: #F39C12;"></i> Что такое фишинг?</h2>
+                <p style="font-size: 20px;">Фишинг (от английского <strong>fishing</strong> — рыбалка) — это когда мошенники «ловят» твои пароли и личные данные, как рыбу на удочку.</p>
+                
+                <div style="display: flex; gap: 20px; align-items: center; margin: 30px 0; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <div style="background: white; border-radius: 20px; padding: 20px; text-align: center;">
+                            <span style="font-size: 60px;">🎣</span>
+                            <h3>Мошенник</h3>
+                            <p>Забрасывает "удочку" - отправляет сообщение с ссылкой</p>
+                        </div>
+                    </div>
+                    <div style="font-size: 40px;">→</div>
+                    <div style="flex: 1; min-width: 250px;">
+                        <div style="background: white; border-radius: 20px; padding: 20px; text-align: center;">
+                            <span style="font-size: 60px;">🐟</span>
+                            <h3>Жертва</h3>
+                            <p>"Клюет" - переходит по ссылке и вводит пароль</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Раздел 2: Макет браузера с подсветкой -->
+            <div style="background: #f8f9fa; border-radius: 30px; padding: 25px; margin-bottom: 30px;">
+                <h2><i class="fas fa-search" style="color: #F39C12;"></i> Как проверять сайт?</h2>
+                <p style="font-size: 20px;">Вот как выглядит настоящий безопасный браузер. Запомни эти 3 шага!</p>
+                
+                <div class="browser-mockup">
+                    <div class="browser-header">
+                        <div class="browser-dots">
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                            <span class="browser-dot"></span>
+                        </div>
+                        <div class="browser-url">
+                            <span style="color: #2ECC71;"><i class="fas fa-lock"></i></span>
+                            <span class="url-highlight">https://</span>
+                            <span style="font-weight: bold;">minecraft.net</span>
+                            <span class="lock-icon"><i class="fas fa-shield-alt"></i> Безопасно</span>
+                        </div>
+                    </div>
+                    <div class="browser-content">
+                        <div style="text-align: center;">
+                            <i class="fas fa-smile" style="font-size: 80px; color: #3498db;"></i>
+                            <h3>Сайт Minecraft</h3>
+                            <p style="color: #2ECC71;">✅ Это безопасный сайт!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
+                    <div style="background: white; border-radius: 20px; padding: 15px; text-align: center;">
+                        <span style="font-size: 30px; color: #F39C12;">1️⃣</span>
+                        <p><strong>Найди замочек</strong> 🔒</p>
+                        <p style="font-size: 14px;">Зеленый замочек значит, что сайт защищен</p>
+                    </div>
+                    <div style="background: white; border-radius: 20px; padding: 15px; text-align: center;">
+                        <span style="font-size: 30px; color: #F39C12;">2️⃣</span>
+                        <p><strong>Проверь адрес</strong> 🔗</p>
+                        <p style="font-size: 14px;">Адрес должен быть написан без ошибок</p>
+                    </div>
+                    <div style="background: white; border-radius: 20px; padding: 15px; text-align: center;">
+                        <span style="font-size: 30px; color: #F39C12;">3️⃣</span>
+                        <p><strong>Смотри https://</strong> 🔐</p>
+                        <p style="font-size: 14px;">В начале должно быть https:// (а не http://)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Раздел 3: Сравнение безопасного и опасного сайта -->
+            <div style="background: #f8f9fa; border-radius: 30px; padding: 25px; margin-bottom: 30px;">
+                <h2><i class="fas fa-balance-scale" style="color: #F39C12;"></i> Сравни сам: Безопасно vs Опасно</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-item safe">
+                        <div class="comparison-title">
+                            <i class="fas fa-check-circle" style="color: #2ECC71;"></i> БЕЗОПАСНО
+                        </div>
+                        <div style="background: white; border-radius: 10px; padding: 15px; font-family: monospace; font-size: 18px;">
+                            <span style="color: #2ECC71;"><i class="fas fa-lock"></i></span>
+                            <span style="background: #E8F8F5; padding: 2px 5px;">https://</span>
+                            <span style="font-weight: bold;">minecraft.net</span>
+                        </div>
+                        <p style="margin-top: 15px;">✅ Есть замочек<br>✅ Правильный адрес<br>✅ Есть https://</p>
+                    </div>
+                    
+                    <div class="comparison-item danger">
+                        <div class="comparison-title">
+                            <i class="fas fa-times-circle" style="color: #E74C3C;"></i> ОПАСНО
+                        </div>
+                        <div style="background: white; border-radius: 10px; padding: 15px; font-family: monospace; font-size: 18px;">
+                            <span style="color: #E74C3C;"><i class="fas fa-unlock-alt"></i></span>
+                            <span style="background: #FDEDEC; padding: 2px 5px;">http://</span>
+                            <span style="font-weight: bold;">minecrafr<span style="color: red; text-decoration: underline;">т</span>.com</span>
+                        </div>
+                        <p style="margin-top: 15px;">❌ Нет замочка<br>❌ Ошибка в адресе (minecrafт)<br>❌ Нет https:// (только http://)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Раздел 4: Виды мошенничества -->
+            <div style="background: #f8f9fa; border-radius: 30px; padding: 25px;">
+                <h2><i class="fas fa-exclamation-triangle" style="color: #F39C12;"></i> Самые частые ловушки</h2>
+                
+                <div class="theory-grid">
+                    <div class="theory-item">
+                        <div class="theory-icon"><i class="fas fa-gamepad"></i></div>
+                        <h3>Игровой фишинг</h3>
+                        <p>"Бесплатные алмазы!", "Введи пароль и получи скины!"</p>
+                        <span style="background: #E74C3C; color: white; padding: 5px 15px; border-radius: 20px; display: inline-block;">ОПАСНО</span>
+                    </div>
+                    
+                    <div class="theory-item">
+                        <div class="theory-icon"><i class="fas fa-envelope"></i></div>
+                        <h3>Письма от "банка"</h3>
+                        <p>"Ваша карта заблокирована! Перейдите по ссылке"</p>
+                        <span style="background: #E74C3C; color: white; padding: 5px 15px; border-radius: 20px; display: inline-block;">ОПАСНО</span>
+                    </div>
+                    
+                    <div class="theory-item">
+                        <div class="theory-icon"><i class="fas fa-gift"></i></div>
+                        <h3>Фальшивые призы</h3>
+                        <p>"Ты выиграл iPhone! Введи данные для доставки"</p>
+                        <span style="background: #E74C3C; color: white; padding: 5px 15px; border-radius: 20px; display: inline-block;">ОПАСНО</span>
+                    </div>
+                    
+                    <div class="theory-item">
+                        <div class="theory-icon"><i class="fas fa-comment"></i></div>
+                        <h3>Сообщения от "друзей"</h3>
+                        <p>"Привет! Скинь код из СМС, я потерял доступ"</p>
+                        <span style="background: #E74C3C; color: white; padding: 5px 15px; border-radius: 20px; display: inline-block;">ОПАСНО</span>
+                    </div>
+                    
+                    <div class="theory-item">
+                        <div class="theory-icon"><i class="fas fa-shield"></i></div>
+                        <h3>Фальшивый антивирус</h3>
+                        <p>"Ваш компьютер заражен! Скачайте срочно!"</p>
+                        <span style="background: #E74C3C; color: white; padding: 5px 15px; border-radius: 20px; display: inline-block;">ОПАСНО</span>
+                    </div>
+                    
+                    <div class="theory-item">
+                        <div class="theory-icon"><i class="fas fa-star"></i></div>
+                        <h3>Поддельный сайт</h3>
+                        <p>Адрес: vkkk.com вместо vk.com</p>
+                        <span style="background: #E74C3C; color: white; padding: 5px 15px; border-radius: 20px; display: inline-block;">ОПАСНО</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Раздел 5: Памятка-шпаргалка -->
+            <div style="background: linear-gradient(135deg, #3498db, #5faee3); color: white; border-radius: 30px; padding: 25px; margin-top: 30px;">
+                <h2 style="color: white;"><i class="fas fa-lightbulb"></i> Запомни!</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div><i class="fas fa-check-circle" style="color: #F39C12;"></i> Всегда проверяй адрес</div>
+                    <div><i class="fas fa-check-circle" style="color: #F39C12;"></i> Ищи зеленый замочек</div>
+                    <div><i class="fas fa-check-circle" style="color: #F39C12;"></i> Не ведись на халяву</div>
+                    <div><i class="fas fa-check-circle" style="color: #F39C12;"></i> Советуйся с родителями</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Тренажер -->
+    <div id="trainer" class="page">
+        <div class="card">
+            <h1><i class="fas fa-gamepad" style="color:#F39C12;"></i> Тренажер «Поймай мошенника»</h1>
+            <div id="trainerContainer" class="trainer-card">
+                <!-- Загружается через JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Награды -->
+    <div id="stickers" class="page">
+        <div class="card">
+            <h1><i class="fas fa-star" style="color:#F39C12;"></i> Мои награды</h1>
+            <p style="font-size: 22px;">Собирай наклейки за правильные ответы!</p>
+            <div class="stickers-grid" id="stickersGrid">
+                <div class="sticker-item" id="sticker1">
+                    <div class="sticker-icon">🛡️</div>
+                    <div>Щит безопасности</div>
+                    <small>3 прав. ответа</small>
+                </div>
+                <div class="sticker-item" id="sticker2">
+                    <div class="sticker-icon">🔒</div>
+                    <div>Замочек-хранитель</div>
+                    <small>6 прав. ответов</small>
+                </div>
+                <div class="sticker-item" id="sticker3">
+                    <div class="sticker-icon">🦊</div>
+                    <div>Лисенок-друг</div>
+                    <small>9 прав. ответов</small>
+                </div>
+                <div class="sticker-item" id="sticker4">
+                    <div class="sticker-icon">🏆</div>
+                    <div>Супергерой</div>
+                    <small>Все задания верно</small>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <p id="statsText" style="font-size: 20px;">Правильных ответов: 0</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Памятка -->
+    <div id="memo" class="page">
+        <div class="card">
+            <h1><i class="fas fa-clipboard-list" style="color:#F39C12;"></i> 5 главных правил безопасности</h1>
+            <div class="rules-grid">
+                <div class="rule-item">
+                    <div class="rule-icon"><i class="fas fa-lock"></i></div>
+                    <div class="rule-title">НИКОМУ НЕ ГОВОРИ ПАРОЛИ</div>
+                    <p>Даже «друзьям» в игре. Настоящий друг не спросит пароль.</p>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-icon"><i class="fas fa-link"></i></div>
+                    <div class="rule-title">ПРОВЕРЯЙ АДРЕС САЙТА</div>
+                    <p>Одна ошибка в букве = ловушка мошенников.</p>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-icon"><i class="fas fa-people-arrows"></i></div>
+                    <div class="rule-title">СОВЕТУЙСЯ С РОДИТЕЛЯМИ</div>
+                    <p>Если что-то непонятно или просят деньги — покажи взрослым.</p>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-icon"><i class="fas fa-gift"></i></div>
+                    <div class="rule-title">ХАЛЯВЫ НЕ БЫВАЕТ</div>
+                    <p>«Бесплатные алмазы» — главная приманка мошенников.</p>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-icon"><i class="fas fa-shield"></i></div>
+                    <div class="rule-title">ИЩИ ЗАМОЧЕК 🔒</div>
+                    <p>Значок замка значит, что сайт безопасен.</p>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <button class="btn btn-green" onclick="downloadMemo()"><i class="fas fa-download"></i> Скачать памятку</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 Поймай мошенника. Проект по информатике.</p>
+</footer>
+
+<script>
+    // ========== РЕГИСТРАЦИЯ ==========
+    let currentUser = {
+        name: 'Саша',
+        avatar: '🦊',
+        correctCount: 0,
+        streak: 0,
+        stickersUnlocked: [false, false, false, false]
+    };
+
+    // Загрузка пользователя из localStorage
+    function loadUser() {
+        const saved = localStorage.getItem('phishingTrainerUser');
+        if (saved) {
+            try {
+                currentUser = JSON.parse(saved);
+            } catch (e) {
+                console.log('Ошибка загрузки пользователя');
+            }
+        }
+        updateUserDisplay();
+    }
+
+    // Сохранение пользователя в localStorage
+    function saveUser() {
+        const name = document.getElementById('userNameInput').value.trim();
+        if (name === '') {
+            alert('Пожалуйста, введи свое имя!');
+            return;
+        }
+        
+        const selectedAvatar = document.querySelector('.avatar-option.selected');
+        const avatar = selectedAvatar ? selectedAvatar.dataset.avatar : '🦊';
+        
+        currentUser.name = name;
+        currentUser.avatar = avatar;
+        
+        localStorage.setItem('phishingTrainerUser', JSON.stringify(currentUser));
+        
+        updateUserDisplay();
+        closeRegisterModal();
+        
+        // Обновляем сообщение талисмана
+        document.getElementById('mascotMessage').textContent = `Привет, ${name}! Я Лисенок-Защитник. Научу тебя ловить мошенников!`;
+    }
+
+    function updateUserDisplay() {
+        document.getElementById('userNameDisplay').textContent = currentUser.name;
+        document.getElementById('userAvatar').textContent = currentUser.avatar;
+        
+        let level = 'Новичок';
+        if (currentUser.correctCount >= 8) level = 'Супергерой';
+        else if (currentUser.correctCount >= 6) level = 'Эксперт';
+        else if (currentUser.correctCount >= 3) level = 'Знаток';
+        
+        document.getElementById('userLevelDisplay').textContent = level;
+        document.getElementById('levelBadge').textContent = `⭐ ${currentUser.correctCount}`;
+        
+        // Обновляем прогресс
+        const progressFill = document.getElementById('progressFill');
+        if (progressFill) {
+            const progress = (currentUser.correctCount / 10) * 100;
+            progressFill.style.width = Math.min(progress, 100) + '%';
+        }
+        
+        // Обновляем награды
+        updateStickers();
+    }
+
+    function openRegisterModal() {
+        document.getElementById('registerModal').classList.add('show');
+        document.getElementById('userNameInput').value = currentUser.name;
+        
+        // Выбираем текущий аватар
+        document.querySelectorAll('.avatar-option').forEach(opt => {
+            if (opt.dataset.avatar === currentUser.avatar) {
+                opt.classList.add('selected');
+            } else {
+                opt.classList.remove('selected');
+            }
+        });
+    }
+
+    function closeRegisterModal() {
+        document.getElementById('registerModal').classList.remove('show');
+    }
+
+    // Выбор аватара
+    document.querySelectorAll('.avatar-option').forEach(opt => {
+        opt.addEventListener('click', function() {
+            document.querySelectorAll('.avatar-option').forEach(o => o.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+
+    // Закрытие модалки по клику вне окна
+    window.onclick = function(event) {
+        const modal = document.getElementById('registerModal');
+        if (event.target === modal) {
+            closeRegisterModal();
+        }
+    };
+
+    // ========== НАВИГАЦИЯ ==========
+    function toggleMenu() {
+        document.getElementById('navMenu').classList.toggle('show');
+    }
+
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active-page');
+        });
+        document.getElementById(pageId).classList.add('active-page');
+        
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.classList.remove('active');
+        });
+        document.getElementById('link-' + pageId).classList.add('active');
+        
+        document.getElementById('navMenu').classList.remove('show');
+        
+        if (pageId === 'trainer') {
+            loadTrainer();
+        } else if (pageId === 'stickers') {
+            updateStickers();
+        }
+    }
+
+    // ========== ДАННЫЕ ТРЕНАЖЕРА ==========
+    const baseTasks = [
+        { id: 1, situation: "В игре Brawl Stars тебе пишут: «Забери 10000 алмазов бесплатно! Перейди по ссылке vk.com» (при наведении видно, что ссылка ведет на vkkkk-free.ru)", correct: "danger", explanation: "Это ловушка! Адрес сайта поддельный, а обещание халявы — приманка мошенников." },
+        { id: 2, situation: "Ты заходишь на сайт minecraft.net. В адресной строке зеленый замочек 🔒 и адрес написан правильно.", correct: "safe", explanation: "Всё правильно! Это настоящий сайт Майнкрафт. Замочек говорит о безопасности." },
+        { id: 3, situation: "Приходит СМС: «Мама, срочно переведи 500 рублей на этот номер +7-999-123-45-67. Я потом объясню».", correct: "danger", explanation: "ОПАСНО! Мама так не напишет. Это мошенники. Сразу покажи сообщение родителям." },
+        { id: 4, situation: "На сайте выскакивает окно: «⚠️ ВАШ КОМПЬЮТЕР ЗАРАЖЕН! Срочно скачайте антивирус по этой ссылке».", correct: "danger", explanation: "Ловушка! Настоящие антивирусы не пугают такими окнами. Не нажимай!" },
+        { id: 5, situation: "Приходит письмо: «Ваш аккаунт в Steam пытаются взломать! Перейдите по ссылке, чтобы подтвердить пароль».", correct: "danger", explanation: "Мошенники! Они хотят, чтобы ты сам отдал им пароль. Не переходи!" },
+        { id: 6, situation: "Ты видишь сайт с адресом steamcomunnity.com (опечатка — вместо community написано comunnity).", correct: "danger", explanation: "Опасный сайт! Даже одна ошибка в адресе — значит, это подделка." },
+        { id: 7, situation: "Ты заходишь на сайт своей школы. Адрес правильный, есть замочек.", correct: "safe", explanation: "Безопасно! Это официальный сайт, ему можно доверять." },
+        { id: 8, situation: "Друг пишет в мессенджере: «Привет! Скинь код, который пришел тебе в СМС, я случайно удалил свой».", correct: "danger", explanation: "ОПАСНО! Друг никогда не попросит код. Скорее всего, его аккаунт взломали." },
+        { id: 9, situation: "Реклама: «Поздравляем! Ты выиграл iPhone 15! Введи свои данные для доставки».", correct: "danger", explanation: "Это обман! Халявы не бывает. Никогда не вводи данные в таких окнах." },
+        { id: 10, situation: "Страница входа ВКонтакте. Адрес vk.com, есть зеленый замочек.", correct: "safe", explanation: "Безопасно! Это настоящий ВК. Можешь входить, но пароль никому не говори." }
+    ];
+
+    // Перемешанные задания
+    let tasks = [];
+    let currentTaskIndex = 0;
+    let answered = false;
+
+    // ========== ИНИЦИАЛИЗАЦИЯ ==========
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function loadTrainer() {
+        tasks = shuffleArray([...baseTasks]);
+        currentTaskIndex = 0;
+        answered = false;
+        renderTask();
+    }
+
+    function updateLevel() {
+        let level = 'Новичок';
+        if (currentUser.correctCount >= 8) level = 'Супергерой';
+        else if (currentUser.correctCount >= 6) level = 'Эксперт';
+        else if (currentUser.correctCount >= 3) level = 'Знаток';
+        
+        document.getElementById('userLevelDisplay').textContent = level;
+        document.getElementById('levelBadge').textContent = `⭐ ${currentUser.correctCount}`;
+        
+        const progressFill = document.getElementById('progressFill');
+        if (progressFill) {
+            const progress = (currentUser.correctCount / 10) * 100;
+            progressFill.style.width = Math.min(progress, 100) + '%';
+        }
+        
+        // Обновляем сообщение талисмана
+        const mascotMessage = document.getElementById('mascotMessage');
+        const mascotEmoji = document.getElementById('mascotEmoji');
+        
+        if (mascotMessage) {
+            if (currentUser.streak >= 3) {
+                mascotMessage.textContent = `Ух ты, ${currentUser.name}! Ты просто гений! 🎉`;
+                mascotEmoji.textContent = currentUser.avatar + '✨';
+            } else {
+                mascotMessage.textContent = `${currentUser.name}, ты справишься! 💪`;
+            }
+        }
+        
+        // Сохраняем прогресс
+        localStorage.setItem('phishingTrainerUser', JSON.stringify(currentUser));
+        
+        // Обновляем награды
+        updateStickers();
+    }
+
+    function updateStickers() {
+        currentUser.stickersUnlocked = [
+            currentUser.correctCount >= 3,
+            currentUser.correctCount >= 6,
+            currentUser.correctCount >= 9,
+            currentUser.correctCount >= 10
+        ];
+        
+        for (let i = 0; i < 4; i++) {
+            const sticker = document.getElementById(`sticker${i+1}`);
+            if (sticker) {
+                if (currentUser.stickersUnlocked[i]) {
+                    sticker.classList.add('unlocked');
+                } else {
+                    sticker.classList.remove('unlocked');
+                }
+            }
+        }
+        
+        const statsText = document.getElementById('statsText');
+        if (statsText) {
+            statsText.textContent = `Правильных ответов: ${currentUser.correctCount}`;
+        }
+    }
+
+    function celebrate() {
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            confetti.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        }
+    }
+
+    function renderTask() {
+        const container = document.getElementById('trainerContainer');
+        if (!container) return;
+        
+        if (currentTaskIndex >= tasks.length) {
+            if (currentUser.correctCount === tasks.length) {
+                currentUser.stickersUnlocked[3] = true;
+                updateStickers();
+                celebrate();
+            }
+            
+            container.innerHTML = `
+                <div style="color: white;">
+                    <i class="fas fa-trophy" style="font-size: 80px; color: #F39C12; animation: bounce 2s infinite;"></i>
+                    <h2 style="color:white;">Молодец, ${currentUser.name}! Ты прошел тренажер!</h2>
+                    <p style="font-size: 24px;">Правильных ответов: ${currentUser.correctCount} из ${tasks.length}</p>
+                    <p style="font-size: 20px;">Ты настоящий супергерой безопасности!</p>
+                    <button class="btn btn-orange" onclick="loadTrainer()"><i class="fas fa-rotate-left"></i> Пройти заново</button>
+                </div>
+            `;
+            return;
+        }
+
+        const task = tasks[currentTaskIndex];
+        container.innerHTML = `
+            <div class="trainer-stats">
+                <span class="task-counter">Задание ${currentTaskIndex+1} из ${tasks.length}</span>
+                <span class="streak"><i class="fas fa-fire"></i> Серия: ${currentUser.streak}</span>
+            </div>
+            <div class="situation-text">${task.situation}</div>
+            <div class="trainer-buttons">
+                <button class="btn btn-red" onclick="checkAnswer('danger')" ${answered ? 'disabled' : ''}><i class="fas fa-skull"></i> ОПАСНО!</button>
+                <button class="btn btn-green" onclick="checkAnswer('safe')" ${answered ? 'disabled' : ''}><i class="fas fa-check"></i> БЕЗОПАСНО</button>
+            </div>
+            <div id="feedbackArea" class="feedback" style="display: none;"></div>
+            <button id="nextBtn" class="btn btn-orange" onclick="nextTask()" style="display: none;"><i class="fas fa-arrow-right"></i> Далее</button>
+        `;
+    }
+
+    function checkAnswer(userChoice) {
+        if (answered) return;
+        answered = true;
+        
+        const task = tasks[currentTaskIndex];
+        const isCorrect = (userChoice === task.correct);
+        const feedbackDiv = document.getElementById('feedbackArea');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let feedbackHtml = '';
+        if (isCorrect) {
+            feedbackHtml = `<span style="color: #2ECC71; font-weight: bold;">✓ Молодец, ${currentUser.name}! Правильно!</span><br>${task.explanation}`;
+            currentUser.correctCount++;
+            currentUser.streak++;
+        } else {
+            feedbackHtml = `<span style="color: #E74C3C; font-weight: bold;">✗ Ошибка! Будь внимательнее, ${currentUser.name}!</span><br>${task.explanation}`;
+            currentUser.streak = 0;
+        }
+        
+        feedbackDiv.style.display = 'block';
+        feedbackDiv.innerHTML = feedbackHtml;
+        nextBtn.style.display = 'inline-block';
+        
+        updateLevel();
+    }
+
+    function nextTask() {
+        currentTaskIndex++;
+        answered = false;
+        renderTask();
+    }
+
+    // ========== ПАМЯТКА ==========
+    function downloadMemo() {
+        const text = `5 ГЛАВНЫХ ПРАВИЛ БЕЗОПАСНОСТИ В ИНТЕРНЕТЕ\n\n1. 🛡️ НИКОМУ НЕ ГОВОРИ ПАРОЛИ — даже друзьям в игре.\n2. 🔗 ПРОВЕРЯЙ АДРЕС САЙТА — одна ошибка в букве = ловушка.\n3. 👨‍👩‍👧 СОВЕТУЙСЯ С РОДИТЕЛЯМИ — если что-то непонятно.\n4. 🎁 БЕСПЛАТНЫЙ СЫР ТОЛЬКО В МЫШЕЛОВКЕ — халява не бывает.\n5. 🔒 ИЩИ ЗАМОЧЕК в адресной строке.\n\nСайт: Поймай мошенника (проект по информатике)`;
+        const blob = new Blob([text], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'pamyatka_bezopasnosti.txt';
+        link.click();
+        alert('Памятка скачана!');
+    }
+
+    // ========== ЗАПУСК ==========
+    window.onload = function() {
+        loadUser();
+        
+        if (document.getElementById('trainer').classList.contains('active-page')) {
+            loadTrainer();
+        }
+        updateLevel();
+        
+        // Показываем регистрацию при первом заходе
+        if (!localStorage.getItem('phishingTrainerUser')) {
+            setTimeout(() => {
+                openRegisterModal();
+            }, 500);
+        }
+    };
+</script>
+
+</body>
+</html>
